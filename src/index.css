@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 20% 98%;
+    --foreground: 220 30% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 30% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 30% 12%;
+
+    --primary: 220 72% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 16% 93%;
+    --secondary-foreground: 220 30% 12%;
+
+    --muted: 210 16% 93%;
+    --muted-foreground: 220 10% 46%;
+
+    --accent: 25 95% 53%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 20% 90%;
+    --input: 214 20% 90%;
+    --ring: 220 72% 50%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 220 30% 12%;
+    --sidebar-primary: 220 72% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 16% 96%;
+    --sidebar-accent-foreground: 220 30% 12%;
+    --sidebar-border: 214 20% 90%;
+    --sidebar-ring: 220 72% 50%;
+
+    --blueprint: 199 89% 48%;
+    --tungsten: 25 95% 53%;
+    --navy: 220 30% 12%;
+    --steel: 214 20% 70%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-sans font-semibold tracking-tight;
+  }
+
+  code, .font-mono {
+    font-family: 'IBM Plex Mono', monospace;
+  }
+}
+
+@layer utilities {
+  .machined-block {
+    @apply bg-card border border-border rounded-lg;
+  }
+
+  .text-data {
+    font-family: 'IBM Plex Mono', monospace;
+    @apply text-blueprint;
+  }
+
+  .cta-button {
+    @apply bg-accent text-accent-foreground font-semibold px-6 py-3 rounded-lg hover:brightness-110 transition-all duration-200;
+  }
+
+  .primary-button {
+    @apply bg-primary text-primary-foreground font-semibold px-6 py-3 rounded-lg hover:brightness-110 transition-all duration-200;
+  }
+
+  .spec-overlay {
+    @apply absolute inset-0 bg-navy/80 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300 rounded-lg;
+  }
+
+  .crosshair-cursor {
+    cursor: crosshair;
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground));
+}
