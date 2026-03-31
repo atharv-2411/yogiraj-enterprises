@@ -1,5 +1,7 @@
 const { validationResult } = require("express-validator");
 const ContactMessage = require("../models/ContactMessage");
+const { sendMail } = require("../utils/mailer");
+const { contactConfirmationTemplate } = require("../utils/emailTemplates");
 
 // @desc    Create contact message (public)
 // @route   POST /api/contact
@@ -15,6 +17,15 @@ const createMessage = async (req, res, next) => {
     const contactMessage = await ContactMessage.create({ name, company, email, phone, message });
 
     console.log(`[Contact] New message from: ${name} <${email}>`);
+
+    try {
+      await sendMail(
+        email,
+        "Your message has been received – Yogiraj Enterprises",
+        contactConfirmationTemplate(name, company, email, phone, message)
+      );
+    } catch (_) {}
+
     res.status(201).json({
       success: true,
       data: contactMessage,

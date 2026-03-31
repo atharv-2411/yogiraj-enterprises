@@ -1,6 +1,8 @@
 const { validationResult } = require("express-validator");
 const Enquiry = require("../models/Enquiry");
 const { deleteImage } = require("../utils/cloudinary");
+const { sendMail } = require("../utils/mailer");
+const { enquiryConfirmationTemplate } = require("../utils/emailTemplates");
 
 // @desc    Create enquiry (public)
 // @route   POST /api/enquiries
@@ -48,6 +50,24 @@ const createEnquiry = async (req, res, next) => {
 
     const enquiry = await Enquiry.create(enquiryData);
     console.log(`[Enquiries] Created: ${enquiry.company} - ${enquiry._id}`);
+
+    try {
+      await sendMail(
+        enquiry.email,
+        "Enquiry Received – Yogiraj Enterprises",
+        enquiryConfirmationTemplate(
+          enquiry.company,
+          enquiry.contactName,
+          enquiry.email,
+          enquiry.partsDescription,
+          enquiry.quantity,
+          enquiry.material,
+          enquiry.deadline,
+          enquiry.dimensions,
+          enquiry.tolerance
+        )
+      );
+    } catch (_) {}
 
     res.status(201).json({
       success: true,

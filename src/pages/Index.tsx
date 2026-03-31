@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useQuery } from "@tanstack/react-query";
 import { ArrowRight, Cpu, Shield, Zap, Target, ChevronRight } from "lucide-react";
 import Layout from "@/components/Layout";
 import StatCounter from "@/components/StatCounter";
 import heroParts from "@/assets/hero-parts.jpg";
+import { clientsAPI } from "@/lib/api";
 
 const services = [
   { icon: Cpu, title: "CNC Machining", desc: "5-axis precision machining with tolerances to ±0.001mm" },
@@ -12,9 +14,18 @@ const services = [
   { icon: Shield, title: "Quality Assurance", desc: "ISO 9001 certified with full CMM inspection reporting" },
 ];
 
-const clientLogos = Array.from({ length: 10 }, (_, i) => `Client ${i + 1}`);
+const Index = () => {
+  const { data } = useQuery({
+    queryKey: ["clients"],
+    queryFn: async () => {
+      const res = await clientsAPI.getAll();
+      return res.data.data;
+    },
+  });
 
-const Index = () => (
+  const clients = data || [];
+
+  return (
   <Layout>
     {/* Hero */}
     <section className="relative min-h-[85vh] flex items-center overflow-hidden bg-foreground">
@@ -98,12 +109,29 @@ const Index = () => (
     <section className="py-16 border-t border-border bg-card">
       <div className="max-w-7xl mx-auto px-6">
         <p className="text-sm font-mono text-blueprint tracking-widest uppercase mb-8 text-center">Trusted By Industry Leaders</p>
-        <div className="grid grid-cols-5 md:grid-cols-10 gap-4">
-          {clientLogos.map((name, i) => (
-            <div key={i} className="machined-block aspect-square flex items-center justify-center text-xs text-muted-foreground font-mono bg-background">
-              {name}
-            </div>
-          ))}
+        <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-10 gap-4">
+          {clients.length === 0
+            ? Array.from({ length: 10 }, (_, i) => (
+                <div key={i} className="machined-block aspect-square flex items-center justify-center text-xs text-muted-foreground font-mono bg-background">
+                  Client {i + 1}
+                </div>
+              ))
+            : clients.map((client: { _id: string; name: string; logo?: { url: string } }, i: number) => (
+                <motion.div
+                  key={client._id}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.05 }}
+                  className="machined-block aspect-square flex items-center justify-center p-3 overflow-hidden bg-background"
+                >
+                  {client.logo?.url ? (
+                    <img src={client.logo.url} alt={client.name} className="max-h-full max-w-full object-contain" />
+                  ) : (
+                    <span className="text-xs text-muted-foreground font-mono text-center">{client.name}</span>
+                  )}
+                </motion.div>
+              ))}
         </div>
       </div>
     </section>
@@ -123,6 +151,7 @@ const Index = () => (
       </div>
     </section>
   </Layout>
-);
+  );
+};
 
 export default Index;

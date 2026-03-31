@@ -707,10 +707,12 @@ const EnquiriesTab = () => {
                   Save Notes
                 </button>
                 <a
-                  href={`mailto:${selectedEnquiry.email}?subject=Re: Your Yogiraj Enquiry`}
+                  href={`mailto:${selectedEnquiry.email}?subject=Re: Part Enquiry – ${selectedEnquiry.company} – Yogiraj Enterprises&body=Dear ${encodeURIComponent(selectedEnquiry.contactName)},%0D%0A%0D%0AThank you for your enquiry regarding ${encodeURIComponent(selectedEnquiry.partsDescription)}.%0D%0A%0D%0A`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="cta-button text-sm inline-flex items-center gap-2"
                 >
-                  <Mail size={14} /> Reply by Email
+                  <Mail size={14} /> Reply to {selectedEnquiry.email}
                 </a>
               </div>
             </motion.div>
@@ -1685,10 +1687,12 @@ const ContactMessagesTab = () => {
               </div>
 
               <a
-                href={`mailto:${selectedMessage.email}?subject=Re: Your Yogiraj Enquiry`}
+                href={`mailto:${selectedMessage.email}?subject=Re: Your Message – Yogiraj Enterprises&body=Dear ${encodeURIComponent(selectedMessage.name)},%0D%0A%0D%0AThank you for contacting Yogiraj Enterprises.%0D%0A%0D%0A`}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="cta-button text-sm inline-flex items-center gap-2 w-full justify-center"
               >
-                <Mail size={16} /> Reply by Email
+                <Mail size={16} /> Reply to {selectedMessage.email}
               </a>
             </motion.div>
           </motion.div>
