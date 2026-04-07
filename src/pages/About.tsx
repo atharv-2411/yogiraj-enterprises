@@ -3,10 +3,10 @@ import { Award, Users, Factory, Shield } from "lucide-react";
 import Layout from "@/components/Layout";
 
 const leadership = [
-  { name: "Alexander Braun", role: "CEO & Founder", bio: "30+ years in precision manufacturing. Founded Yogiraj Enterprises in 1999." },
-  { name: "Dr. Maria Santos", role: "Chief Technology Officer", bio: "PhD in Mechanical Engineering. Leads R&D and advanced manufacturing." },
-  { name: "James Mitchell", role: "VP Operations", bio: "20 years operations management. ISO implementation specialist." },
-  { name: "Sarah Kim", role: "Director of Quality", bio: "15 years in quality assurance. Six Sigma Master Black Belt." },
+  { name: "Deepak More", role: "CEO & Founder", bio: "30+ years in precision manufacturing. Founded Yogiraj Enterprises in 1999." },
+  { name: "Jyoti More", role: "Chief Technology Officer", bio: "PhD in Mechanical Engineering. Leads R&D and advanced manufacturing." },
+  { name: "Mahendra Pawar", role: "VP Operations", bio: "20 years operations management. ISO implementation specialist." },
+  { name: "Shivaji More", role: "Director of Quality", bio: "15 years in quality assurance. Six Sigma Master Black Belt." },
 ];
 
 const timeline = [
