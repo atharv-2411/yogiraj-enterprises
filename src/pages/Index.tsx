@@ -5,6 +5,7 @@ import { ArrowRight, Cpu, Shield, Zap, Target, ChevronRight } from "lucide-react
 import Layout from "@/components/Layout";
 import StatCounter from "@/components/StatCounter";
 import heroParts from "@/assets/hero-parts.jpg";
+import heroVideo from "@/assets/hero-video.mp4";
 import { clientsAPI } from "@/lib/api";
 
 const services = [
@@ -33,34 +34,57 @@ const Index = () => {
         <img src={heroParts} alt="Precision engineered mechanical parts" className="w-full h-full object-cover opacity-30" />
         <div className="absolute inset-0 bg-gradient-to-r from-foreground via-foreground/90 to-foreground/40" />
       </div>
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-20">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          className="max-w-2xl"
-        >
-          <p className="text-sm font-mono text-blueprint tracking-widest uppercase mb-4">
-            ISO 9001 Certified Manufacturer
-          </p>
-          <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6 text-background">
-            Precision Mechanical Parts for Enterprise B2B
-          </h1>
-          <p className="text-lg text-steel mb-8 leading-relaxed max-w-lg">
-            Engineering excellence at scale. From prototype to production, we deliver parts with tolerances that define industry standards.
-          </p>
-          <div className="flex flex-wrap gap-4">
-            <Link to="/request" className="cta-button inline-flex items-center gap-2">
-              Request Quote <ArrowRight size={18} />
-            </Link>
-            <Link
-              to="/products"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-steel/30 text-background font-medium hover:bg-background/10 transition-colors"
-            >
-              View Catalog <ChevronRight size={18} />
-            </Link>
-          </div>
-        </motion.div>
+      <div className="relative z-10 max-w-7xl mx-auto px-6 py-20 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Left: Text */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+          >
+            <p className="text-sm font-mono text-blueprint tracking-widest uppercase mb-4">
+              ISO 9001 Certified Manufacturer
+            </p>
+            <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6 text-background">
+              Precision Mechanical Parts for Enterprise B2B
+            </h1>
+            <p className="text-lg text-steel mb-8 leading-relaxed">
+              Engineering excellence at scale. From prototype to production, we deliver parts with tolerances that define industry standards.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <Link to="/request" className="cta-button inline-flex items-center gap-2">
+                Request Quote <ArrowRight size={18} />
+              </Link>
+              <Link
+                to="/products"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-steel/30 text-background font-medium hover:bg-background/10 transition-colors"
+              >
+                View Catalog <ChevronRight size={18} />
+              </Link>
+            </div>
+          </motion.div>
+
+          {/* Right: Video Card */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="hidden lg:block"
+          >
+            <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+              <video
+                src={heroVideo}
+                autoPlay
+                muted={false}
+                loop
+                playsInline
+                controls
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/10 pointer-events-none" />
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
 
