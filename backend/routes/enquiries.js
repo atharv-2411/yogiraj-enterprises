@@ -7,6 +7,7 @@ const {
   getEnquiry,
   updateEnquiry,
   deleteEnquiry,
+  replyToEnquiry,
 } = require("../controllers/enquiryController");
 const { protect } = require("../middleware/auth");
 const { enquiryFilesUpload } = require("../middleware/upload");
@@ -28,5 +29,7 @@ router
   .get(protect, getEnquiry)
   .put(protect, updateEnquiry)
   .delete(protect, deleteEnquiry);
+
+router.post("/:id/reply", protect, replyToEnquiry);
 
 module.exports = router;

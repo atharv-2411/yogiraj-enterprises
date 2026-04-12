@@ -68,9 +68,9 @@ const Contact = () => {
 
             <div className="space-y-4">
               {[
-                { icon: MapPin, label: "Address", value: "1234 Industrial Parkway\nSuite 500, Detroit, MI 48201" },
-                { icon: Phone, label: "Phone", value: "+1 (555) 234-5678" },
-                { icon: Mail, label: "Email", value: "info@yogiraj-enterprises.com" },
+                { icon: MapPin, label: "Address", value: "N 42 JC-2, 9/7, Raigad Chowk, Pawan Nagar, Cidco, Nashik Maharashtra\n Works:- B12, MIDC Ambad, Nashik" },
+                { icon: Phone, label: "Phone", value: "8007459311" },
+                { icon: Mail, label: "Email", value: "yogirajenterprises2018@gmail.com" },
                 { icon: Clock, label: "Hours", value: "Mon–Fri: 8:00 AM – 5:00 PM EST" },
               ].map((item) => (
                 <div key={item.label} className="machined-block p-5">
@@ -85,8 +85,17 @@ const Contact = () => {
                   </div>
                 </div>
               ))}
-              <div className="machined-block aspect-[4/3] flex items-center justify-center bg-secondary rounded-lg">
-                <span className="text-xs text-muted-foreground font-mono">Map Integration</span>
+              <div className="machined-block overflow-hidden rounded-lg">
+                <iframe
+                  title="Yogiraj Enterprises Location"
+                  src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d14999.323880889087!2d73.75200306537388!3d19.973609559909413!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sN%2042%20JC-2%2C%209%2F7%2C%20Raigad%20Chowk%2C%20Pawan%20Nagar%2C%20Cidco%2C%20Nashik%20Maharashtra!5e0!3m2!1sen!2sin!4v1776012451462!5m2!1sen!2sin"
+                  width="100%"
+                  height="280"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
               </div>
             </div>
           </div>

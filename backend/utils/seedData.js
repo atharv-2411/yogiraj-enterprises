@@ -166,8 +166,8 @@ const servicesSeed = [
 ];
 
 const defaultAdmin = {
-  email: "admin@yogiraj.com",
-  password: "Admin@123",
+  email: "yogirajenterprises2018@gmail.com",
+  password: "yogi@18",
   name: "Yogiraj Admin",
   role: "admin",
 };

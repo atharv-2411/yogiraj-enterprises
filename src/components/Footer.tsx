@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
-import { Settings } from "lucide-react";
+import logo from "@/assets/logo.jpeg";
 
 const Footer = () => (
   <footer className="border-t border-border bg-card py-12">
     <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
       <div>
-        <div className="flex items-center gap-2 mb-4">
-          <Settings size={20} className="text-primary" />
+        <div className="flex items-center gap-3 mb-4">
+          <img src={logo} alt="Yogiraj Enterprises" className="h-12 w-auto object-contain" />
           <span className="font-semibold"><span className="text-primary">Yogiraj</span> Enterprises</span>
         </div>
         <p className="text-sm text-muted-foreground leading-relaxed">
@@ -34,8 +34,8 @@ const Footer = () => (
       <div>
         <h4 className="text-sm font-semibold mb-4 text-foreground">Contact</h4>
         <div className="flex flex-col gap-2 text-sm text-muted-foreground font-mono">
-          <span>info@ab-engineering.com</span>
-          <span>+1 (555) 234-5678</span>
+          <span>yogirajenterprises2018@gmail.com</span>
+          <span>8007459311</span>
           <span>Mon–Fri 8:00–17:00</span>
         </div>
       </div>

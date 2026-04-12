@@ -6,6 +6,7 @@ const {
   getMessages,
   markAsRead,
   deleteMessage,
+  replyToMessage,
 } = require("../controllers/contactController");
 const { protect } = require("../middleware/auth");
 
@@ -18,6 +19,7 @@ const validateContact = [
 router.route("/").post(validateContact, createMessage).get(protect, getMessages);
 
 router.put("/:id/read", protect, markAsRead);
+router.post("/:id/reply", protect, replyToMessage);
 router.delete("/:id", protect, deleteMessage);
 
 module.exports = router;

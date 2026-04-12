@@ -177,7 +177,7 @@ const ConfirmDialog = ({
 
 // ==================== ADMIN LOGIN ====================
 const AdminLogin = ({ onLogin }: { onLogin: () => void }) => {
-  const [email, setEmail] = useState("admin@yogiraj.com");
+  const [email, setEmail] = useState("yogirajenterprises2018@gmail.com");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -389,6 +389,8 @@ const EnquiriesTab = () => {
   const [adminNotes, setAdminNotes] = useState("");
   const [quotedPrice, setQuotedPrice] = useState("");
   const [savingNotes, setSavingNotes] = useState(false);
+  const [replyText, setReplyText] = useState("");
+  const [sendingReply, setSendingReply] = useState(false);
 
   const fetchEnquiries = async () => {
     try {
@@ -426,6 +428,20 @@ const EnquiriesTab = () => {
       toast.error("Failed to delete enquiry");
     } finally {
       setConfirmDelete(null);
+    }
+  };
+
+  const handleSendReply = async () => {
+    if (!selectedEnquiry || !replyText.trim()) return;
+    setSendingReply(true);
+    try {
+      await enquiriesAPI.reply(selectedEnquiry._id, replyText);
+      toast.success(`Reply sent to ${selectedEnquiry.email}`);
+      setReplyText("");
+    } catch {
+      toast.error("Failed to send reply");
+    } finally {
+      setSendingReply(false);
     }
   };
 
@@ -695,6 +711,16 @@ const EnquiriesTab = () => {
                     placeholder="0.00"
                   />
                 </div>
+                <div>
+                  <label className={labelClass}>Reply to {selectedEnquiry.email}</label>
+                  <textarea
+                    rows={4}
+                    value={replyText}
+                    onChange={(e) => setReplyText(e.target.value)}
+                    className={`${inputClass} resize-none`}
+                    placeholder="Type your reply message here..."
+                  />
+                </div>
               </div>
 
               <div className="flex gap-3">
@@ -706,14 +732,14 @@ const EnquiriesTab = () => {
                   {savingNotes && <Loader2 size={14} className="animate-spin" />}
                   Save Notes
                 </button>
-                <a
-                  href={`mailto:${selectedEnquiry.email}?subject=Re: Part Enquiry – ${selectedEnquiry.company} – Yogiraj Enterprises&body=Dear ${encodeURIComponent(selectedEnquiry.contactName)},%0D%0A%0D%0AThank you for your enquiry regarding ${encodeURIComponent(selectedEnquiry.partsDescription)}.%0D%0A%0D%0A`}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button
+                  onClick={handleSendReply}
+                  disabled={sendingReply || !replyText.trim()}
                   className="cta-button text-sm inline-flex items-center gap-2"
                 >
-                  <Mail size={14} /> Reply to {selectedEnquiry.email}
-                </a>
+                  {sendingReply ? <Loader2 size={14} className="animate-spin" /> : <Mail size={14} />}
+                  {sendingReply ? "Sending..." : "Send Reply"}
+                </button>
               </div>
             </motion.div>
           </motion.div>
@@ -1547,6 +1573,22 @@ const ContactMessagesTab = () => {
   const [messages, setMessages] = useState<ContactMessage[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedMessage, setSelectedMessage] = useState<ContactMessage | null>(null);
+  const [replyText, setReplyText] = useState("");
+  const [sendingReply, setSendingReply] = useState(false);
+
+  const handleSendReply = async () => {
+    if (!selectedMessage || !replyText.trim()) return;
+    setSendingReply(true);
+    try {
+      await contactAPI.reply(selectedMessage._id, replyText);
+      toast.success(`Reply sent to ${selectedMessage.email}`);
+      setReplyText("");
+    } catch {
+      toast.error("Failed to send reply");
+    } finally {
+      setSendingReply(false);
+    }
+  };
 
   const fetchMessages = async () => {
     try {
@@ -1686,14 +1728,25 @@ const ContactMessagesTab = () => {
                 <p className="text-sm text-foreground leading-relaxed">{selectedMessage.message}</p>
               </div>
 
-              <a
-                href={`mailto:${selectedMessage.email}?subject=Re: Your Message – Yogiraj Enterprises&body=Dear ${encodeURIComponent(selectedMessage.name)},%0D%0A%0D%0AThank you for contacting Yogiraj Enterprises.%0D%0A%0D%0A`}
-                target="_blank"
-                rel="noopener noreferrer"
+              <div className="mb-4">
+                <label className={labelClass}>Reply to {selectedMessage.email}</label>
+                <textarea
+                  rows={4}
+                  value={replyText}
+                  onChange={(e) => setReplyText(e.target.value)}
+                  className={`${inputClass} resize-none`}
+                  placeholder="Type your reply message here..."
+                />
+              </div>
+
+              <button
+                onClick={handleSendReply}
+                disabled={sendingReply || !replyText.trim()}
                 className="cta-button text-sm inline-flex items-center gap-2 w-full justify-center"
               >
-                <Mail size={16} /> Reply to {selectedMessage.email}
-              </a>
+                {sendingReply ? <Loader2 size={16} className="animate-spin" /> : <Mail size={16} />}
+                {sendingReply ? "Sending..." : "Send Reply"}
+              </button>
             </motion.div>
           </motion.div>
         )}

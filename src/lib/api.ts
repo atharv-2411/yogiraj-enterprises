@@ -87,6 +87,8 @@ export const enquiriesAPI = {
   update: (id: string, data: { status?: string; adminNotes?: string; quotedPrice?: number }) =>
     api.put(`/enquiries/${id}`, data),
   delete: (id: string) => api.delete(`/enquiries/${id}`),
+  reply: (id: string, replyMessage: string) =>
+    api.post(`/enquiries/${id}/reply`, { replyMessage }),
 };
 
 // ─── Contact ──────────────────────────────────────────────────────────────────
@@ -97,6 +99,8 @@ export const contactAPI = {
     api.get("/contact", { params }),
   markAsRead: (id: string) => api.put(`/contact/${id}/read`),
   delete: (id: string) => api.delete(`/contact/${id}`),
+  reply: (id: string, replyMessage: string) =>
+    api.post(`/contact/${id}/reply`, { replyMessage }),
 };
 
 export default api;

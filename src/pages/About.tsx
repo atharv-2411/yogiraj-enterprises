@@ -3,20 +3,20 @@ import { Award, Users, Factory, Shield } from "lucide-react";
 import Layout from "@/components/Layout";
 
 const leadership = [
-  { name: "Deepak More", role: "CEO & Founder", bio: "30+ years in precision manufacturing. Founded Yogiraj Enterprises in 1999." },
+  { name: "Deepak More", role: "CEO & Founder", bio: "20+ years in precision manufacturing. Founded Yogiraj Enterprises in 2017." },
   { name: "Jyoti More", role: "Chief Technology Officer", bio: "PhD in Mechanical Engineering. Leads R&D and advanced manufacturing." },
   { name: "Mahendra Pawar", role: "VP Operations", bio: "20 years operations management. ISO implementation specialist." },
   { name: "Shivaji More", role: "Director of Quality", bio: "15 years in quality assurance. Six Sigma Master Black Belt." },
 ];
 
 const timeline = [
-  { year: "1999", event: "Yogiraj Enterprises founded with 3 CNC machines" },
-  { year: "2004", event: "ISO 9001 certification achieved" },
-  { year: "2008", event: "Expanded to 50,000 sq ft facility" },
-  { year: "2012", event: "Entered aerospace and defense sectors" },
-  { year: "2016", event: "Invested in 5-axis machining capability" },
-  { year: "2020", event: "Launched rapid prototyping division" },
-  { year: "2024", event: "200+ enterprise clients worldwide" },
+  { year: "2017", event: "Yogiraj Enterprises founded with 3 CNC machines" },
+  { year: "2018", event: "ISO 9001 certification achieved" },
+  { year: "2020", event: "Expanded to 50,000 sq ft facility" },
+  { year: "2021", event: "Entered aerospace and defense sectors" },
+  { year: "2022", event: "Invested in 5-axis machining capability" },
+  { year: "2023", event: "Launched rapid prototyping division" },
+  { year: "2024", event: "10+ enterprise clients worldwide" },
 ];
 
 const certs = [
@@ -34,7 +34,7 @@ const About = () => (
           <p className="text-sm font-mono text-blueprint tracking-widest uppercase mb-2">Who We Are</p>
           <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-6">About Yogiraj Enterprises</h1>
           <p className="text-lg text-muted-foreground max-w-2xl leading-relaxed">
-            Since 1999, we've built our reputation on a single principle: precision is non-negotiable.
+            Since 2017, we've built our reputation on a single principle: precision is non-negotiable.
           </p>
         </div>
 

@@ -91,10 +91,10 @@ const Index = () => {
     {/* Stats */}
     <section className="py-20 bg-card border-b border-border">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
-        <StatCounter value={25} suffix="+" label="Years in Business" />
+        <StatCounter value={8} suffix="+" label="Years in Business" />
         <StatCounter value={500000} suffix="+" label="Parts Manufactured" />
-        <StatCounter value={200} suffix="+" label="Enterprise Clients" />
-        <StatCounter value={45} suffix="+" label="Countries Served" />
+        <StatCounter value={10} suffix="+" label="Enterprise Clients" />
+        <StatCounter value={1} suffix="+" label="Countries Served" />
       </div>
     </section>
 
@@ -133,10 +133,10 @@ const Index = () => {
     <section className="py-16 border-t border-border bg-card">
       <div className="max-w-7xl mx-auto px-6">
         <p className="text-sm font-mono text-blueprint tracking-widest uppercase mb-8 text-center">Trusted By Industry Leaders</p>
-        <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-10 gap-4">
+        <div className="flex flex-wrap justify-center gap-6">
           {clients.length === 0
             ? Array.from({ length: 10 }, (_, i) => (
-                <div key={i} className="machined-block aspect-square flex items-center justify-center text-xs text-muted-foreground font-mono bg-background">
+                <div key={i} className="machined-block w-36 h-36 flex items-center justify-center text-xs text-muted-foreground font-mono bg-background">
                   Client {i + 1}
                 </div>
               ))
@@ -147,7 +147,7 @@ const Index = () => {
                   whileInView={{ opacity: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.05 }}
-                  className="machined-block aspect-square flex items-center justify-center p-3 overflow-hidden bg-background"
+                  className="machined-block w-36 h-36 flex items-center justify-center p-4 overflow-hidden bg-background"
                 >
                   {client.logo?.url ? (
                     <img src={client.logo.url} alt={client.name} className="max-h-full max-w-full object-contain" />

@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Settings } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
+import logo from "@/assets/logo.jpeg";
 
 const navItems = [
   { path: "/", label: "Home" },
@@ -20,9 +21,9 @@ const Navbar = () => {
     <header className="fixed top-0 left-0 right-0 z-50 bg-card/90 backdrop-blur-md border-b border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2 font-bold text-lg tracking-tight text-foreground">
-          <Settings size={22} className="text-primary" />
-          <span><span className="text-primary">Yogiraj</span> Enterprises</span>
+        <Link to="/" className="flex items-center gap-3">
+          <img src={logo} alt="Yogiraj Enterprises" className="h-14 w-auto object-contain" />
+          <span className="font-bold text-lg"><span className="text-primary">Yogiraj</span> Enterprises</span>
         </Link>
 
         {/* Desktop nav */}

@@ -4,6 +4,21 @@ const { deleteImage } = require("../utils/cloudinary");
 const { sendMail } = require("../utils/mailer");
 const { enquiryConfirmationTemplate } = require("../utils/emailTemplates");
 
+const replyTemplate = (name, replyMessage) => `
+<!DOCTYPE html><html><body style="font-family:Arial,sans-serif;background:#f4f4f4;padding:30px 0;">
+<table width="600" cellpadding="0" cellspacing="0" style="background:#fff;border-radius:8px;overflow:hidden;margin:0 auto;">
+  <tr><td style="background:#2563EB;padding:24px 32px;"><h1 style="margin:0;color:#fff;font-size:20px;">Yogiraj Enterprises</h1></td></tr>
+  <tr><td style="padding:32px;">
+    <p style="color:#1e293b;font-size:15px;">Dear ${name},</p>
+    <div style="background:#f8fafc;border-left:4px solid #2563EB;padding:16px;border-radius:0 6px 6px 0;margin:16px 0;color:#1e293b;font-size:14px;line-height:1.7;">${replyMessage.replace(/\n/g, "<br/>")}</div>
+    <p style="color:#64748b;font-size:13px;">Best regards,<br/><strong>Yogiraj Enterprises Team</strong></p>
+  </td></tr>
+  <tr><td style="background:#f8fafc;padding:16px 32px;border-top:1px solid #e2e8f0;text-align:center;">
+    <p style="margin:0;color:#94a3b8;font-size:12px;">© ${new Date().getFullYear()} Yogiraj Enterprises. All rights reserved.</p>
+  </td></tr>
+</table>
+</body></html>`;
+
 // @desc    Create enquiry (public)
 // @route   POST /api/enquiries
 // @access  Public
@@ -190,4 +205,29 @@ const deleteEnquiry = async (req, res, next) => {
   }
 };
 
-module.exports = { createEnquiry, getEnquiries, getEnquiry, updateEnquiry, deleteEnquiry };
+// @desc    Reply to enquiry
+// @route   POST /api/enquiries/:id/reply
+// @access  Protected
+const replyToEnquiry = async (req, res, next) => {
+  try {
+    const { replyMessage } = req.body;
+    if (!replyMessage) {
+      return res.status(400).json({ success: false, error: "Reply message is required" });
+    }
+    const enquiry = await Enquiry.findById(req.params.id);
+    if (!enquiry) {
+      return res.status(404).json({ success: false, error: "Enquiry not found" });
+    }
+    await sendMail(
+      enquiry.email,
+      "Re: Your Part Enquiry – Yogiraj Enterprises",
+      replyTemplate(enquiry.contactName, replyMessage)
+    );
+    console.log(`[Enquiries] Reply sent to: ${enquiry.email}`);
+    res.status(200).json({ success: true, message: "Reply sent successfully" });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { createEnquiry, getEnquiries, getEnquiry, updateEnquiry, deleteEnquiry, replyToEnquiry };
