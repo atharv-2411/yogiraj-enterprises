@@ -127,7 +127,7 @@ const startServer = async () => {
     process.on("SIGTERM", () => {
       console.log("[Server] SIGTERM received. Shutting down gracefully...");
       server.close(() => {
-        mongoose.connection.close(false, () => {
+        mongoose.connection.close().then(() => {
           console.log("[Server] MongoDB connection closed");
           process.exit(0);
         });
