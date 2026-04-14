@@ -26,12 +26,12 @@ const PORT = process.env.PORT || 5000;
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow all origins during initial deployment
-      // Update FRONTEND_URL once frontend is deployed
       const allowed = [
         "http://localhost:8080",
         "http://localhost:5173",
         process.env.FRONTEND_URL,
+        process.env.FRONTEND_URL?.replace("https://", "https://www."),
+        process.env.FRONTEND_URL?.replace("https://www.", "https://"),
       ].filter(Boolean);
 
       if (!origin || allowed.includes(origin) || origin.endsWith(".vercel.app") || process.env.NODE_ENV !== "production") {
