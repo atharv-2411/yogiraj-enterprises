@@ -34,8 +34,8 @@ const Index = () => {
         <img src={heroParts} alt="Precision engineered mechanical parts" className="w-full h-full object-cover opacity-30" />
         <div className="absolute inset-0 bg-gradient-to-r from-foreground via-foreground/90 to-foreground/40" />
       </div>
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-20 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 py-16 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
           {/* Left: Text */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -45,10 +45,10 @@ const Index = () => {
             <p className="text-sm font-mono text-blueprint tracking-widest uppercase mb-4">
               ISO 9001 Certified Manufacturer
             </p>
-            <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6 text-background">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-background">
               Precision Mechanical Parts for Enterprise B2B
             </h1>
-            <p className="text-lg text-steel mb-8 leading-relaxed">
+            <p className="text-base lg:text-lg text-steel mb-8 leading-relaxed">
               Engineering excellence at scale. From prototype to production, we deliver parts with tolerances that define industry standards.
             </p>
             <div className="flex flex-wrap gap-4">
@@ -69,7 +69,7 @@ const Index = () => {
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="hidden lg:block"
+            className="w-full"
           >
             <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
               <video
@@ -79,7 +79,7 @@ const Index = () => {
                 loop
                 playsInline
                 controls
-                className="w-full h-full object-cover"
+                className="w-full h-auto object-cover max-h-[320px] lg:max-h-none"
               />
               <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/10 pointer-events-none" />
             </div>
