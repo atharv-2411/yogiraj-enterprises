@@ -1,4 +1,6 @@
 require("dotenv").config();
+const dns = require("dns");
+dns.setDefaultResultOrder("ipv4first");
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -126,11 +128,14 @@ const startServer = async () => {
 
     process.on("SIGTERM", () => {
       console.log("[Server] SIGTERM received. Shutting down gracefully...");
-      server.close(() => {
-        mongoose.connection.close().then(() => {
+      server.close(async () => {
+        try {
+          await mongoose.connection.close();
           console.log("[Server] MongoDB connection closed");
-          process.exit(0);
-        });
+        } catch (e) {
+          console.warn("[Server] MongoDB close warning:", e.message);
+        }
+        process.exit(0);
       });
     });
   } catch (error) {
