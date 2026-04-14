@@ -23,7 +23,10 @@ const PORT = process.env.PORT || 5000;
 
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:8080",
+    origin: [
+      process.env.FRONTEND_URL || "http://localhost:8080",
+      /\.vercel\.app$/,
+    ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
